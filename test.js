@@ -232,3 +232,11 @@ test('Center-only perfect returns still resolve 100 points at every difficulty',
     assert.ok(stats.maxRally<120,'No effectively endless automatic rally');
   }
 });
+
+test('Point and fault intermissions ignore new charge input', () => {
+  const g = new Tennis();
+  for (const state of ['ready', 'point', 'fault', 'match']) {
+    g.state = state; g.charging = false; g.press();
+    assert.equal(g.charging, false);
+  }
+});
